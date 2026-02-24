@@ -1,0 +1,188 @@
+{
+  "name": "devsnip-sidebar",
+  "displayName": "DevSnip Commander \u2013 Snippet Sidebar",
+  "description": "Instant copy-paste command snippets for Git, npm, Docker, and more \u2014 directly in your VS Code sidebar. Add your own custom commands in seconds.",
+  "version": "1.0.3",
+  "publisher": "Southface",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/devsnip"
+  },
+  "keywords": [
+    "snippets",
+    "commands",
+    "git",
+    "npm",
+    "docker",
+    "terminal",
+    "productivity",
+    "cheatsheet",
+    "copy-paste",
+    "shortcuts",
+    "cli",
+    "devtools"
+  ],
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Snippets",
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:devsnipView"
+  ],
+  "main": "./out/extension.js",
+  "icon": "media/icon.png",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "devsnip-sidebar",
+          "title": "DevSnip",
+          "icon": "media/sidebar-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "devsnip-sidebar": [
+        {
+          "id": "devsnipView",
+          "name": "Snippets"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "devsnip.copySnippet",
+        "title": "DevSnip: Copy Snippet",
+        "icon": "$(copy)"
+      },
+      {
+        "command": "devsnip.addCustomSnippet",
+        "title": "DevSnip: Add Custom Snippet",
+        "icon": "$(add)"
+      },
+      {
+        "command": "devsnip.deleteCustomSnippet",
+        "title": "DevSnip: Delete Snippet",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "devsnip.editCustomSnippet",
+        "title": "DevSnip: Edit Snippet",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "devsnip.addCustomCategory",
+        "title": "DevSnip: Add Custom Category",
+        "icon": "$(add)"
+      },
+      {
+        "command": "devsnip.refresh",
+        "title": "DevSnip: Refresh",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "devsnip.insertSnippet",
+        "title": "DevSnip: Insert into Terminal",
+        "icon": "$(terminal)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "devsnip.addCustomCategory",
+          "when": "view == devsnipView",
+          "group": "navigation@1"
+        },
+        {
+          "command": "devsnip.refresh",
+          "when": "view == devsnipView",
+          "group": "navigation@2"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "devsnip.copySnippet",
+          "when": "view == devsnipView && (viewItem == snippet || viewItem == customSnippet)",
+          "group": "inline@1"
+        },
+        {
+          "command": "devsnip.insertSnippet",
+          "when": "view == devsnipView && (viewItem == snippet || viewItem == customSnippet)",
+          "group": "inline@2"
+        },
+        {
+          "command": "devsnip.editCustomSnippet",
+          "when": "view == devsnipView && viewItem == customSnippet",
+          "group": "inline@3"
+        },
+        {
+          "command": "devsnip.deleteCustomSnippet",
+          "when": "view == devsnipView && (viewItem == customSnippet || viewItem == customCategory)",
+          "group": "inline@4"
+        },
+        {
+          "command": "devsnip.addCustomSnippet",
+          "when": "view == devsnipView && (viewItem == category || viewItem == customCategory)",
+          "group": "inline@1"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "DevSnip",
+      "properties": {
+        "devsnip.customCategories": {
+          "type": "array",
+          "default": [],
+          "description": "Custom snippet categories managed by DevSnip UI.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "label": {
+                "type": "string"
+              },
+              "icon": {
+                "type": "string"
+              },
+              "snippets": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.80.0",
+    "typescript": "^5.0.0"
+  }
+}
