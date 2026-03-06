@@ -4,6 +4,8 @@
 
 DevSnip adds a sidebar to VS Code with categorized, ready-to-use CLI commands for Git, npm, Docker, Linux, and more. Click any snippet to copy it instantly — or send it directly into your terminal. Build your own library of custom commands and shortcuts that stay with you across every project.
 
+![DevSnip Commander Demo in VS Code](https://raw.githubusercontent.com/southy404/devsnip/refs/heads/main/media/devsnip.gif)
+
 ---
 
 ## Features
